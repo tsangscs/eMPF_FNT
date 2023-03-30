@@ -8,19 +8,22 @@ class Func:
     busProcess = ""
     timeBox = ""
     showAndTellStatus = ""
+    releaseStatus = ""
     numPassed = 0
 
-    def __init__(self, functionID, dashboardModule, busProcess, timeBox, showAndTellStatus):
+    def __init__(self, functionID, dashboardModule, busProcess, timeBox, showAndTellStatus, releaseStatus):
         self.functionID = functionID
         self.dashboardModule = dashboardModule
         self.busProcess = busProcess
         self.timeBox = timeBox
         self.showAndTellStatus = showAndTellStatus
+        self.releaseStatus = releaseStatus
 
     def print(self):
         print(str(self.functionID) + ": " + str(self.dashboardModule) + ", " +
               str(self.busProcess) + ", " + str(self.timeBox) + ", " +
-              str(self.showAndTellStatus) + ", " + str(self.numPassed))
+              str(self.showAndTellStatus) + ", " + str(self.releaseStatus) + ", " +
+              str(self.numPassed))
 
 
 class ReleaseStatus:
@@ -31,97 +34,8 @@ class ReleaseStatus:
     colTimeBox = 6
     colNumPassed = 18
     colShowAndTell = 7
+    colRelease = 9
     funcDict = {}
-
-    funcMapDict = {
-        "FS- UF_22_Chk_bal_0 and deceased": "FS-UF_22_Chk_bal_0anddeceased",
-        "FS- UF_22a_Stop_Derisking": "FS-UF_22a_Stop_Derisking",
-        "FS-BPM-DC-001": "FS-BPM-DCA-001",
-        "FS-BPM-DC-005": "FS-BPM-DCA-005",
-        "FS-BPM-ENG-002": "FS-BPM-ENR-002",
-        "FS-BPM-INV-002D": "FS-BPM-INV-002",
-        "FS-BPM-INV-002-D": "FS-BPM-INV-002",
-        "FS-FS-UF-MMB-011": "FS-UF-MMB-011",
-        "FS-FS-UF-WDR-009": "FS-UF-WDR-009",
-        "FS-FS-UF-WDR-096": "FS-UF-WDR-096",
-        "FS-FS-UF-WDR-207": "FS-UF-WDR-207",
-        "FS-UD-RPT-PD-014": "FS-UF-RPT-PD-014",
-        "FS-UF_06_Chk_DIS fund": "FS-UF_06_Chk_DISfund",
-        "FS-UF_13_ Add_FS_instr": "FS-UF_13_Add_FS_instr",
-        "FS-UF_15_De-risking existing_asset": "FS-UF_15_De-riskingexisting_asset",
-        "FS-UF-CCS-Voice-Screen-QM-SA-0001": "UF-CCS-Voice-Screen-QM-SA-0001",
-        "FS-UF-CCS-Voice-Screen-QM-SA-0002": "UF-CCS-Voice-Screen-QM-SA-0002",
-        "FS-UF-CCS-Voice-Screen-QM-SA-0003": "UF-CCS-Voice-Screen-QM-SA-0003",
-        "FS-UF-CCS-Voice-Screen-QM-SA-0004": "UF-CCS-Voice-Screen-QM-SA-0004",
-        "FS-UF-CCS-Voice-Screen-QM-SA-0005": "UF-CCS-Voice-Screen-QM-SA-0005",
-        "FS-UF-CON-CEE-906": "FS-UF-CON-CEE-006",
-        "FS-UF-CON-EE-012": "FS-UF-CON-CEE-012",
-        "FS-UF-CON-REE-058 FS-UF-CON-CEE-009": "FS-UF-CON-REE-058, FS-UF-CON-CEE-009",
-        "FS-UF-CON-SVCSVC-002": "FS-UF-CON-SVCTVC-002",
-        "FS-UF-DCR-MPFA-007a": "FS-UF-DCR-MPFA-007",
-        "FS-UF-DM-036.": "FS-UF-DM-036",
-        "FS-UF-ENR-CEE-029 FS-UF-ENR-CEE-030": "FS-UF-ENR-CEE-029, FS-UF-ENR-CEE-030",
-        "FS-UF-ENR-EE-033": "FS-UF-ENR-CEE-033",
-        "FS-UF-FE-ENQUIRY-MEM-005": "FS-UF-FE-EE-ENR-MEM-005",
-        "FS-UF-FE-ENQUIRY-MEM-006": "FS-UF-FE-EE-ENR-MEM-006",
-        "FS-UF-FE-PUB-WEB-006FS-UF-FE-3rdPARTY-004a": "FS-UF-FE-PUB-WEB-006, FS-UF-FE-3rdPARTY-004a",
-        "FS-UF-FE-TRS-TVC-MEM-006": "FS-UF-FE-TRS-TVC-MEM-06",
-        "FS-UF-FE-UB-MEM-007 FS-UF-WDR-PW-091": "FS-UF-FE-UB-MEM-007, FS-UF-WDR-PW-091",
-        "FS-UF-FPD-001": "FS-UF-SWH-FPD-001",
-        "FS-UF-INC-001": "FS-UF-INF-001",
-        "FS-UF-INC-002": "FS-UF-INF-002",
-        "FS-UF-INC-003": "FS-UF-INF-003",
-        "FS-UF-INC-004": "FS-UF-INF-004",
-        "FS-UF-INC-005": "FS-UF-INF-005",
-        "FS-UF-INC-006": "FS-UF-INF-006",
-        "FS-UF-INC-007": "FS-UF-INF-007",
-        "FS-UF-INC-008": "FS-UF-INF-008",
-        "FS-UF-INC-009": "FS-UF-INF-009",
-        "FS-UF-INC-010": "FS-UF-INF-010",
-        "FS-UF-INC-011": "FS-UF-INF-011",
-        "FS-UF-INC-012": "FS-UF-INF-012",
-        "FS-UF-INF-010D-013": "FS-UF-INF-010",
-        "Fs-UF-LSP-043": "FS-UF-LSP-043",
-        "FS-UF-MLFUB-UA-001-a1": "FS-UF-MLFUB-UA-001",
-        "FS-UF-MMB-012 UF-UC-001": "FS-UF-MMB-012, UF-UC-001",
-        "FS-UF-RPR-ARI-005": "FS-UF-RPT-ARI-005",
-        "FS-UF-RPT-P": "FS-UF-RPT-PD-013",
-        "FS-UF-RTP-PAR-001": "FS-UF-RPT-PAR-001",
-        "FS-UF-WDR-008 UF-UC-001": "FS-UF-WDR-008, UF-UC-001",
-        "FS-UF-WDR-BK-016 UF-UC-001": "FS-UF-WDR-BK-016, UF-UC-001",
-        "FS-UF-WDR-PW092": "FS-UF-WDR-PW-092",
-        "FS-UF-WRD-PW-008": "FS-UF-WDR-PW-008",
-        "FS-US-RPT-002": "FS-UF-RPT-002",
-        "MLFUB-RP-003": "FS-UF-MLFUB-RP-003",
-        "S-UF-CCS-IVRS-0014": "FS-UF-CCS-IVRS-0014",
-        "UF-AR-001": "FS-UF-RPT-AR-001",
-        "UF-AR-002": "FS-UF-RPT-AR-002",
-        "UF-DMS-001": "FS-UF-EDMS-001",
-        "UF-DMS-002": "FS-UF-EDMS-002",
-        "UF-DMS-003": "FS-UF-EDMS-003",
-        "UF-DMS-004": "FS-UF-EDMS-004",
-        "UF-DMS-005": "FS-UF-EDMS-005",
-        "UF-DMS-006": "FS-UF-EDMS-006",
-        "UF-DMS-007": "FS-UF-EDMS-007",
-        "UF-DMS-008": "FS-UF-EDMS-008",
-        "UF-DMS-009": "FS-UF-EDMS-009",
-        "UF-DMS-010": "FS-UF-EDMS-010",
-        "UF-DMS-011": "FS-UF-EDMS-011",
-        "UF-DMS-012": "FS-UF-EDMS-012",
-        "UF-DMS-013": "FS-UF-EDMS-013",
-        "UF-DMS-014": "FS-UF-EDMS-014",
-        "UF-ENR-CEE-008": "FS-UF-ENR-CEE-008",
-        "UF-ENR-CEE-036": "FS-UF-ENR-CEE-036",
-        "UF-REG-ER-013": "FS-UF-REG-ER-013",
-        "UF-REG-ER-014": "FS-UF-REG-ER-014",
-        "UF-REG-ER-015": "FS-UF-REG-ER-015",
-        "UF-UBE-036": "FS-UF-UBE-036",
-        "UF-WDR-100": "FS-UF-WDR-100",
-        "UF-WDR-207": "FS-UF-WDR-207",
-        "UF-WDR-PW-H14": "FS-UF-WDR-PW-H14",
-        "UF-WDR-WO-008": "FS-UF-WDR-WO-008",
-        "UF-WDR-WO-020": "FS-UF-WDR-WO-020"
-        }
 
     def loadFuncDict(self, workbook):
         try:
@@ -130,7 +44,7 @@ class ReleaseStatus:
 
             for rownum in range(2, sheet.max_row+1):
                 funcID = sheet.cell(row=rownum, column=self.colFunctionID).value
-                print("Loading row["+str(rownum)+"]: funcID = "+ funcID)
+                #print("Loading row["+str(rownum)+"]: funcID = "+ funcID)
                 if funcID is not None:
                     funcID = funcID.strip()
                 else:
@@ -159,7 +73,16 @@ class ReleaseStatus:
                 else:
                     showAndTell = "Not Completed"
 
-                func = Func(funcID, dashboardModule, busProcess, timebox, showAndTell)
+                release = sheet.cell(row=rownum, column=self.colRelease).value
+                if release is not None:
+                    if release.strip() == "" or release.strip() == "Not Released":
+                        release = "Not Released"
+                    else:
+                        release = release.strip()
+                else:
+                    release = "Not Released"
+
+                func = Func(funcID, dashboardModule, busProcess, timebox, showAndTell, release)
                 self.funcDict[funcID] = func
 
         except Exception as ex:
@@ -195,9 +118,99 @@ class TestCase:
     timeBox = ""
     passStatus = ""
     showAndTellStatus = ""
+    releaseStatus = ""
     funclist = {}
     error = ""
 
+    funcMapDict = {
+        "FS- UF_22_Chk_bal_0 and deceased": "FS-UF_22_Chk_bal_0anddeceased",
+        "FS- UF_22a_Stop_Derisking": "FS-UF_22a_Stop_Derisking",
+        "FS-BPM-DC-001": "FS-BPM-DCA-001",
+        "FS-BPM-DC-005": "FS-BPM-DCA-005",
+        "FS-BPM-ENG-002": "FS-BPM-ENR-002",
+        "FS-BPM-INV-002D": "FS-BPM-INV-002",
+        "FS-BPM-INV-002-D": "FS-BPM-INV-002",
+        "FS-FS-UF-MMB-011": "FS-UF-MMB-011",
+        "FS-FS-UF-WDR-009": "FS-UF-WDR-009",
+        "FS-FS-UF-WDR-096": "FS-UF-WDR-096",
+        "FS-FS-UF-WDR-207": "FS-UF-WDR-207",
+        "FS-UD-RPT-PD-014": "FS-UF-RPT-PD-014",
+        "FS-UF_06_Chk_DIS fund": "FS-UF_06_Chk_DISfund",
+        "FS-UF_13_ Add_FS_instr": "FS-UF_13_Add_FS_instr",
+        "FS-UF_15_De-risking existing_asset": "FS-UF_15_De-riskingexisting_asset",
+        "FS-UF-CCS-Voice-Screen-QM-SA-0001": "UF-CCS-Voice-Screen-QM-SA-0001",
+        "FS-UF-CCS-Voice-Screen-QM-SA-0002": "UF-CCS-Voice-Screen-QM-SA-0002",
+        "FS-UF-CCS-Voice-Screen-QM-SA-0003": "UF-CCS-Voice-Screen-QM-SA-0003",
+        "FS-UF-CCS-Voice-Screen-QM-SA-0004": "UF-CCS-Voice-Screen-QM-SA-0004",
+        "FS-UF-CCS-Voice-Screen-QM-SA-0005": "UF-CCS-Voice-Screen-QM-SA-0005",
+        "FS-UF-CON-CEE-906": "FS-UF-CON-CEE-006",
+        "FS-UF-CON-EE-012": "FS-UF-CON-CEE-012",
+        "FS-UF-CON-REE-058 FS-UF-CON-CEE-009": "FS-UF-CON-REE-058,FS-UF-CON-CEE-009",
+        "FS-UF-CON-SVCSVC-002": "FS-UF-CON-SVCTVC-002",
+        "FS-UF-DCR-MPFA-007a": "FS-UF-DCR-MPFA-007",
+        "FS-UF-DM-036.": "FS-UF-DM-036",
+        "FS-UF-ENR-CEE-029 FS-UF-ENR-CEE-030": "FS-UF-ENR-CEE-029,FS-UF-ENR-CEE-030",
+        "FS-UF-ENR-EE-033": "FS-UF-ENR-CEE-033",
+        "FS-UF-FE-ENQUIRY-MEM-005": "FS-UF-FE-EE-ENR-MEM-005",
+        "FS-UF-FE-ENQUIRY-MEM-006": "FS-UF-FE-EE-ENR-MEM-006",
+        "FS-UF-FE-PUB-WEB-006FS-UF-FE-3rdPARTY-004a": "FS-UF-FE-PUB-WEB-006,FS-UF-FE-3rdPARTY-004a",
+        "FS-UF-FE-TRS-TVC-MEM-006": "FS-UF-FE-TRS-TVC-MEM-06",
+        "FS-UF-FE-UB-MEM-007 FS-UF-WDR-PW-091": "FS-UF-FE-UB-MEM-007,FS-UF-WDR-PW-091",
+        "FS-UF-FPD-001": "FS-UF-SWH-FPD-001",
+        "FS-UF-INC-001": "FS-UF-INF-001",
+        "FS-UF-INC-002": "FS-UF-INF-002",
+        "FS-UF-INC-003": "FS-UF-INF-003",
+        "FS-UF-INC-004": "FS-UF-INF-004",
+        "FS-UF-INC-005": "FS-UF-INF-005",
+        "FS-UF-INC-006": "FS-UF-INF-006",
+        "FS-UF-INC-007": "FS-UF-INF-007",
+        "FS-UF-INC-008": "FS-UF-INF-008",
+        "FS-UF-INC-009": "FS-UF-INF-009",
+        "FS-UF-INC-010": "FS-UF-INF-010",
+        "FS-UF-INC-011": "FS-UF-INF-011",
+        "FS-UF-INC-012": "FS-UF-INF-012",
+        "FS-UF-INF-010D-013": "FS-UF-INF-010",
+        "Fs-UF-LSP-043": "FS-UF-LSP-043",
+        "FS-UF-MLFUB-UA-001-a1": "FS-UF-MLFUB-UA-001",
+        "FS-UF-MMB-012 UF-UC-001": "FS-UF-MMB-012,UF-UC-001",
+        "FS-UF-RPR-ARI-005": "FS-UF-RPT-ARI-005",
+        "FS-UF-RPT-P": "FS-UF-RPT-PD-013",
+        "FS-UF-RTP-PAR-001": "FS-UF-RPT-PAR-001",
+        "FS-UF-WDR-008 UF-UC-001": "FS-UF-WDR-008,UF-UC-001",
+        "FS-UF-WDR-BK-016 UF-UC-001": "FS-UF-WDR-BK-016,UF-UC-001",
+        "FS-UF-WDR-PW092": "FS-UF-WDR-PW-092",
+        "FS-UF-WRD-PW-008": "FS-UF-WDR-PW-008",
+        "FS-US-RPT-002": "FS-UF-RPT-002",
+        "MLFUB-RP-003": "FS-UF-MLFUB-RP-003",
+        "S-UF-CCS-IVRS-0014": "FS-UF-CCS-IVRS-0014",
+        "UF-AR-001": "FS-UF-RPT-AR-001",
+        "UF-AR-002": "FS-UF-RPT-AR-002",
+        "UF-DMS-001": "FS-UF-EDMS-001",
+        "UF-DMS-002": "FS-UF-EDMS-002",
+        "UF-DMS-003": "FS-UF-EDMS-003",
+        "UF-DMS-004": "FS-UF-EDMS-004",
+        "UF-DMS-005": "FS-UF-EDMS-005",
+        "UF-DMS-006": "FS-UF-EDMS-006",
+        "UF-DMS-007": "FS-UF-EDMS-007",
+        "UF-DMS-008": "FS-UF-EDMS-008",
+        "UF-DMS-009": "FS-UF-EDMS-009",
+        "UF-DMS-010": "FS-UF-EDMS-010",
+        "UF-DMS-011": "FS-UF-EDMS-011",
+        "UF-DMS-012": "FS-UF-EDMS-012",
+        "UF-DMS-013": "FS-UF-EDMS-013",
+        "UF-DMS-014": "FS-UF-EDMS-014",
+        "UF-ENR-CEE-008": "FS-UF-ENR-CEE-008",
+        "UF-ENR-CEE-036": "FS-UF-ENR-CEE-036",
+        "UF-REG-ER-013": "FS-UF-REG-ER-013",
+        "UF-REG-ER-014": "FS-UF-REG-ER-014",
+        "UF-REG-ER-015": "FS-UF-REG-ER-015",
+        "UF-UBE-036": "FS-UF-UBE-036",
+        "UF-WDR-100": "FS-UF-WDR-100",
+        "UF-WDR-207": "FS-UF-WDR-207",
+        "UF-WDR-PW-H14": "FS-UF-WDR-PW-H14",
+        "UF-WDR-WO-008": "FS-UF-WDR-WO-008",
+        "UF-WDR-WO-020": "FS-UF-WDR-WO-020"
+        }
     def __init__(self, testName):
         self.testName = testName
 
@@ -208,6 +221,7 @@ class TestCase:
               self.timeBox + ", " +
               self.passStatus + ", " +
               self.showAndTellStatus + ", " +
+              self.releaseStatus + ", " +
               ":".join(self.funclist)
               )
 
@@ -216,6 +230,35 @@ class TestCase:
             self.error += ": "
         self.error += errMsg
 
+    def fixFuncList(self):
+        resultList = []
+        for f in (self.funclist) :
+            # find if need to convert
+            #print("fixFuncList => checking " + f)
+            fixedFuncList = []
+            try:
+                #print("fixFuncList => mapped function list " + self.funcMapDict[f.strip()])
+                fixedFuncList = self.funcMapDict[f.strip()].split(",")
+            except Exception as ve:
+                fixedFuncList.append(f.strip())
+            #print("fixFuncList => mapped functions " + str(fixedFuncList))
+
+            # Replace by converted Function ID
+            for fixedFunc in (fixedFuncList):
+                #print("fixFuncList => coverted function = " + fixedFunc)
+                # Find if already added the converted Function ID
+                try:
+                    idx = resultList.index(fixedFunc.strip())
+                except ValueError as ve:
+                    idx = -1
+                # Add to
+                #print("fixFuncList => original index = " + str(idx))
+                if idx == -1:
+                    #print("fixFuncList => adding to functional list")
+                    resultList.append(fixedFunc.strip())
+        #end for
+        self.funclist = resultList
+
 class TestCaseSheet:
     sheetName = "Main Sheet"
     colTestName = 1
@@ -223,9 +266,10 @@ class TestCaseSheet:
     colModule = 4
     colBusProcess = 6
     colRQID = 7
-    colShowAndTellStatus = 8
-    colTimeBox = 21
-    colErrMsg = 22
+    colTimeBox = 8
+    colShowAndTellStatus = 9
+    colReleaseStatus = 10
+    colErrMsg = 23
 
     def updateTestCaseSheet(self, workbook):
         try:
@@ -234,8 +278,8 @@ class TestCaseSheet:
             sheet.cell(row=1, column=self.colErrMsg).value = "Error Message"
 
             #Read Function Release Status
-            releaseStatus = ReleaseStatus()
-            releaseStatus.loadFuncDict(workbook)
+#            releaseStatus = ReleaseStatus()
+#            releaseStatus.loadFuncDict(workbook)
             print(datetime.now().strftime("%H:%M:%S") + ": Processing [" + self.sheetName + "] row 2 to max row " + str(sheet.max_row))
 
             for rownum in range(2, sheet.max_row+1):
@@ -258,13 +302,18 @@ class TestCaseSheet:
     #                        if rqidlist[len(rqidlist)] == ",":
     #                            rqidlist = rqidlist[0:len(rqidlist)-2]
                             rqidlist = rqidlist.replace(chr(10), ",")
+#                            rqidlist = rqidlist.replace(".", ",")
                             testCase.funclist = rqidlist.split(",")
+                            # Fixing incorrect RQID
+                            testCase.fixFuncList()
 
                     if testCase.funclist is None or len(testCase.funclist) == 0:
                         testCase.appendError("RQID is #N/A or blank")
                     else:
                         dashboardModule = []
                         busProcess = []
+
+                        # Check for each function in RQID
                         for rqid in testCase.funclist:
                             funcID = rqid.strip()
                             if len(funcID) == 0:
@@ -315,6 +364,15 @@ class TestCaseSheet:
                                 else:
                                     testCase.appendError("Invalid S&T Status of " + funcID + " = " + func.showAndTellStatus)
 
+                                # Update Test Case Release Status
+                                if len(func.releaseStatus) == 0 or func.releaseStatus == "Not Released":
+                                    testCase.releaseStatus = "Not Released"
+                                elif func.releaseStatus == "Released":
+                                    if testCase.releaseStatus != "Not Released":
+                                        testCase.releaseStatus = "Released"
+                                else:
+                                    testCase.appendError("Invalid Release Status of " + funcID + " = " + func.releaseStatus)
+
                                 # Update function pass status
                                 if testCase.passStatus[0:6] == "Passed":
                                     func.numPassed += 1
@@ -327,6 +385,9 @@ class TestCaseSheet:
                         sheet.cell(row=rownum, column=self.colBusProcess).value = testCase.busProcess
                         sheet.cell(row=rownum, column=self.colTimeBox).value = testCase.timeBox
                         sheet.cell(row=rownum, column=self.colShowAndTellStatus).value = testCase.showAndTellStatus
+                        sheet.cell(row=rownum, column=self.colReleaseStatus).value = testCase.releaseStatus
+                        sheet.cell(row=rownum, column=self.colRQID).value = ",".join(testCase.funclist)
+
                     # end if
                     sheet.cell(row=rownum, column=self.colErrMsg).value = testCase.error
 
@@ -357,6 +418,16 @@ if __name__ == '__main__':
     outfile = infile[0:extensionIdx] + "_out.xlsx"
     print("Output file = " + outfile)
 
+    # Read Function Release Status
+    print(datetime.now().strftime("%H:%M:%S") + ": Loading input workbook in read-only data-only mode ...")
+    workbook_r = load_workbook(filename=infile, data_only=True)
+
+    print(datetime.now().strftime("%H:%M:%S") + ": Checking Release Status ...")
+    releaseStatus = ReleaseStatus()
+    releaseStatus.loadFuncDict(workbook_r)
+    workbook_r.close()
+
+    # Updating Test Case information
     print(datetime.now().strftime("%H:%M:%S") + ": Loading input workbook ...")
     workbook = load_workbook(filename=infile)
 
@@ -367,3 +438,10 @@ if __name__ == '__main__':
     print(datetime.now().strftime("%H:%M:%S") + ": Saving output workbook ...")
     workbook.save(outfile)
     print(datetime.now().strftime("%H:%M:%S") + ": Job completed!")
+
+#   testing
+#    tc = TestCase("ABC")
+#    tc.funclist = "FS-UF-AML-004,FS-UF-AML-007,UF-DMS-007,FS-UF-WDR-BK-016 UF-UC-001".split(",")
+#    print("Before Conversion TC Func ID: " + str(tc.funclist))
+#    tc.fixFuncList()
+#    print("After Conversion TC Func ID: " + str(tc.funclist))
